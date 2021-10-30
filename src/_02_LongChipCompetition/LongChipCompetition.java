@@ -1,6 +1,7 @@
 package _02_LongChipCompetition;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class LongChipCompetition {
@@ -11,11 +12,14 @@ public class LongChipCompetition {
      * Beatle classes. Make sure to initialize The Beatles before you start
      * your search.
      */
-    private ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
+    private static ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
 
     public static void main(String[] args) {
         LongChipCompetition lcc = new LongChipCompetition();
-
+        lcc.initializeBeatles();
+        for (int i = 0; i < theBeatles.size(); i++) {
+        	
+		}
     }
 
     private void initializeBeatles() {
