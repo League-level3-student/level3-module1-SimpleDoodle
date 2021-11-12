@@ -12,14 +12,24 @@ public class LongChipCompetition {
      * Beatle classes. Make sure to initialize The Beatles before you start
      * your search.
      */
-    private static ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
+    private static  ArrayList<Beatle> theBeatles = new ArrayList<Beatle>();
 
     public static void main(String[] args) {
+        double dub = 0; 
+        String bname = "No one";
         LongChipCompetition lcc = new LongChipCompetition();
         lcc.initializeBeatles();
-        for (int i = 0; i < theBeatles.size(); i++) {
-        	
-		}
+        for (Beatle bee : theBeatles) {
+			ArrayList<Chip> chop = bee.getChips();
+			for (Chip chopper : chop) {
+				//System.out.println(bee.getName() + " has a chip length of " + chopper.getLength());
+				if (chopper.getLength()>=dub) {
+					dub = chopper.getLength();
+					bname = bee.getName();
+				}
+			}
+			}
+		System.out.println(bname + " has the longest chip");
     }
 
     private void initializeBeatles() {
@@ -39,38 +49,38 @@ public class LongChipCompetition {
 }
 
 class Beatle {
-    private String name;
-    private ArrayList<Chip> chips = new ArrayList<Chip>();
+	private String name;
+	private ArrayList<Chip> chips = new ArrayList<Chip>();
 
-    public Beatle(String name) {
-        this.name = name;
-        initializePlateOfChips();
-    }
+	public Beatle(String name) {
+		this.name = name;
+		initializePlateOfChips();
+	}
 
-    private void initializePlateOfChips() {
-        int numberOfChips = new Random().nextInt(100);
-        for (int i = 0; i < numberOfChips; i++) {
-            chips.add(new Chip(new Random().nextDouble() * 10));
-        }
-    }
+	private void initializePlateOfChips() {
+		int numberOfChips = new Random().nextInt(100);
+		for (int i = 0; i < numberOfChips; i++) {
+			chips.add(new Chip(new Random().nextDouble() * 10));
+		}
+	}
 
-    public ArrayList<Chip> getChips() {
-        return this.chips;
-    }
+	public ArrayList<Chip> getChips() {
+		return this.chips;
+	}
 
-    public String getName() {
-        return this.name;
-    }
+	public String getName() {
+		return this.name;
+	}
 }
 
 class Chip {
-    private double length;
+	private double length;
 
-    public double getLength() {
-        return length;
-    }
+	public double getLength() {
+		return length;
+	}
 
-    Chip(double d) {
-        this.length = d;
-    }
+	Chip(double d) {
+		this.length = d;
+	}
 }
