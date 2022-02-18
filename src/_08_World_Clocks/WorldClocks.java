@@ -3,10 +3,13 @@ package _08_World_Clocks;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -47,13 +50,22 @@ public class WorldClocks implements ActionListener {
     String dateStr;
     String timeStr;
     
+    JFrame jframe = new JFrame();
+    JPanel jpanel = new JPanel();
+    JButton button = new JButton();
+    
+    HashMap<String, TimeZone> cities = new HashMap<>();
+    
     public WorldClocks() {
+    	jframe.add(jpanel);
+    	jpanel.add(button);
+    	
         clockUtil = new ClockUtilities();
 
         // The format for the city must be: city, country (all caps)
-        city = "Chicago, US";
+        city = JOptionPane.showInputDialog("Enter the name of a city");
         timeZone = clockUtil.getTimeZoneFromCityName(city);
-        
+        cities.put(city, timeZone);
         Calendar calendar = Calendar.getInstance(timeZone);
         String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         String dayOfWeek = calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
