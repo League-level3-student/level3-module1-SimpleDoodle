@@ -49,7 +49,8 @@ public class WorldClocks implements ActionListener, KeyListener {
 
     JFrame frame;
     JPanel panel;
-    ArrayList<JTextArea> updater;
+    ArrayList<JTextArea> updater = new ArrayList<>();
+    ArrayList<String> cityArray = new ArrayList<>();
     JTextArea textArea;
     
     String city;
@@ -78,12 +79,11 @@ public class WorldClocks implements ActionListener, KeyListener {
         clockUtil = new ClockUtilities();
         frame = new JFrame();
         panel = new JPanel();
+        frame.add(panel);
         textArea = new JTextArea();
-        updater.add(textArea);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(false);
         frame.setSize(100, 100);
-        frame.add(panel);
 
 
         // The format for the city must be: city, country (all caps)
@@ -94,18 +94,17 @@ public class WorldClocks implements ActionListener, KeyListener {
     }
     public void citySelector() {
     	 // Sample starter program
-        frame.add(panel);
         textArea = new JTextArea();
-        updater.add(textArea);
         panel.add(textArea);
         textArea.setText(city + "\n" + dateStr);
-
+        updater.add(textArea);
         
         // This Timer object is set to call the actionPerformed() method every
         // 1000 milliseconds
         timer = new Timer(1000, this);
         timer.start();
 		city = text.getText();
+		cityArray.add(city);
     	timeZone = clockUtil.getTimeZoneFromCityName(city);
         cities.put(city, timeZone);
         Calendar calendar = Calendar.getInstance(timeZone);
@@ -128,9 +127,8 @@ public class WorldClocks implements ActionListener, KeyListener {
             String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
             String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
             timeStr = militaryTime + twelveHourTime;
-            
             System.out.println(timeStr);
-            updater.get(count).setText(city + "\n" + dateStr + "\n" + timeStr);
+            updater.get(count).setText(cityArray.get(count) + "\n" + dateStr + "\n" + timeStr);
             count++;
 		}
     	frame.pack();
